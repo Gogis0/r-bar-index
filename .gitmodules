@@ -1,6 +1,3 @@
 [submodule "suffixient"]
 	path = suffixient
 	url = https://github.com/regindex/suffixient.git
-[submodule "bigrepair"]
-	path = bigrepair
-	url = https://gitlab.com/manzai/bigrepair

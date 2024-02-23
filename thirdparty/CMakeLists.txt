@@ -18,13 +18,13 @@ if(NOT bigrepair_POPULATED)
   
 endif()
 
-## Add ShapedSlp
+## Add suffixient
 FetchContent_Declare(
-  shaped_slp
-  GIT_REPOSITORY https://github.com/Gogis0/ShapedSlp
-  GIT_TAG lcp
+  suffixient
+  GIT_REPOSITORY https://github.com/regindex/suffixient
+  GIT_TAG main
 )
-if(NOT shaped_slp_POPULATED)
-  FetchContent_Populate(shaped_slp)
-  add_subdirectory(${shaped_slp_SOURCE_DIR} ${shaped_slp_BINARY_DIR})
+if(NOT suffixient_POPULATED)
+  FetchContent_Populate(suffixient)
+  add_subdirectory(${suffixient_SOURCE_DIR} ${suffixient_BINARY_DIR})
 endif()

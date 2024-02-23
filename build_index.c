@@ -106,9 +106,18 @@ void compute_hashes() {
   fputs("==== GRAMMAR HASHES COMPUTED!\n", stderr);
 }
 
-char char_at(int i) {
-  return (i < alph) ?(char)i : char_at(i > R[i - alph].left) ? char_at(R[i - alph].right) : 0;
+
+char get_char_at(int i, size_t x) {
+  if (x < alph) return (char)x;
+  uint64_t left_size = get_nonterminal_size(R[x - alph].left);
+  if (i < left_size) {
+    return get_char_at(i, R[x - alph].left);
+  } else {
+    return get_char_at(i - left_size, R[x - alph].right);
+  }
 }
+
+char char_at(int i) { return get_char_at(i, n+alph); } 
 
 void load_rules(FILE *f) {
   uint64_t n;
@@ -117,17 +126,15 @@ void load_rules(FILE *f) {
   fread(R, sizeof(Tpair), n, f);
 }
 
-void load_suffixient(char *name, uint64_t* suffixient_size, uint64_t **suffixient) {
-  char fname[1024];
-  strcpy(fname, name);
-  strcat(fname, ".suffixient");
-  FILE *f = fopen(fname, "rb");
-  fread(suffixient_size, sizeof(uint64_t), 1, f);
-  printf("suffixient_size: %zd\n", *suffixient_size);
-  *suffixient = (uint64_t *)malloc((*suffixient_size) * sizeof(uint64_t));
-  fread(*suffixient, sizeof(uint64_t), (*suffixient_size), f); 
-  fclose(f);
-  fputs("==== SUFFIXIENT LOADED!\n", stderr);
+void load_suffixient(char *filename, uint64_t* size, uint64_t **suffixient_set) {
+  char full_filename[1024];
+  strcpy(full_filename, filename);
+  strcat(full_filename, ".suffixient");
+  FILE *file = fopen(full_filename, "rb");
+  fread(size, sizeof(uint64_t), 1, file);
+  *suffixient_set = (uint64_t *)malloc((*size) * sizeof(uint64_t));
+  fread(*suffixient_set, sizeof(uint64_t), (*size), file); 
+  fclose(file);
 }
 
 // get contexts at the suffixient positions

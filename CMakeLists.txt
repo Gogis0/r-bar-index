@@ -14,7 +14,7 @@ set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-g -ggdb -Ofast -fstrict-aliasing -march=nat
 
 add_subdirectory(thirdparty)
 
-project (suffixient-index)
+project (rho-index)
 
 include_directories(${PROJECT_SOURCE_DIR})
 include_directories(~/include)  #SDSL headers
@@ -23,5 +23,8 @@ LINK_DIRECTORIES(~/lib)         #SDSL libs
 message("Building in ${CMAKE_BUILD_TYPE} mode")
 
 find_library(SDSL_LIB sdsl)
-add_executable(lcp_test test.c lcp.c)
-TARGET_LINK_LIBRARIES(lcp_test sdsl criterion)
+#add_executable(lcp_test test.c grammar.c)
+#TARGET_LINK_LIBRARIES(lcp_test sdsl criterion)
+
+
+add_executable(build_index hashing.c build_index.c)

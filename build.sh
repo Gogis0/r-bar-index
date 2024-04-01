@@ -6,6 +6,9 @@ filename="$1"
 # Log file
 logfile="processing.log"
 
+# Clear the log file
+> "$logfile"
+
 # Function to log messages
 log() {
     timestamp=$(date +"%Y-%m-%d %T")
@@ -38,6 +41,30 @@ fi
 # Next step is to generate the grammar using bigrepair
 log "Generating grammar using bigrepair for file: $filename"
 ~/externalSoftware/bigrepair/bigrepair -v "${filename}" >> "$logfile" 2>&1
+
+# Check if the grammar is generated
+if [ $? -ne 0 ]; then
+    log "Failed to generate grammar for file: $filename"
+    echo "Failed to generate grammar. Check '$logfile' for details."
+    exit 1
+else
+    log "Grammar generated successfully for file: $filename"
+    echo "Grammar generated successfully for file: $filename"
+fi
+
+# Build ShapedSlp
+log "Building ShapedSlp for file: $filename"
+~/externalSoftware/ShapedSlp/build/SlpEncBuild -i "${filename}" -f Bigrepair -e PlainSlp_32Fblc -o "${filename}.PlainSlp_32Fblc" >> "$logfile" 2>&1
+
+# Check if the ShapedSlp is built
+if [ $? -ne 0 ]; then
+    log "Failed to build ShapedSlp for file: $filename"
+    echo "Failed to build ShapedSlp. Check '$logfile' for details."
+    exit 1
+else
+    log "ShapedSlp built successfully for file: $filename"
+    echo "ShapedSlp built successfully for file: $filename"
+fi
 
 # Build the rho-index
 log "Building the rho-index for file: $filename"

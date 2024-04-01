@@ -22,4 +22,4 @@ if [ $? -ne 0 ]; then
 fi
 
 # Next step is to generate the grammar using bigrepair
-~/externalSoftware/bigrepair/bigrepair -v filename
+~/externalSoftware/bigrepair/bigrepair -v "${filename}"

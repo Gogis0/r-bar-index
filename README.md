@@ -16,7 +16,7 @@ TODO
 TODO
 
 ## Authors
-Adrian Goga, Travis Gagie (original LCP), Nicola Prezza ([suffixient](https://github.com/nicolaprezza/suffixient)).
+Adrian Goga, Travis Gagie (original LCP), Nicola Prezza ([suffixient](https://github.com/regindex/suffixient)).
 
 ## License
 [MIT](LICENSE)

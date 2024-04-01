@@ -280,11 +280,6 @@ int main(int argc, char **argv) {
   uint64_t suff_size, *suffixient;
   load_suffixient(argv[1], &suff_size, &suffixient);
 
-  // Write the contents of the suffixient set for debugging
-  for (int i = 0; i < suff_size; i++) {
-    printf("%zd\n", suffixient[i]);
-  }
-
 
   // open output file
   read_grammar(argv[1]);

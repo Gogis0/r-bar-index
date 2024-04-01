@@ -1,8 +1,8 @@
 #include <stdint.h>
 
-extern const uint64_t mersenne_prime_exponent = 61;
-extern const uint64_t prime = ((uint64_t)1 << mersenne_prime_exponent) - 1; // 2^61 - 1
-extern const uint64_t base = 411910476928516559; // randomly generated
+extern const uint64_t mersenne_prime_exponent;
+extern const uint64_t prime;
+extern const uint64_t base;
 
 uint64_t mod_mersenne(uint64_t a, const uint64_t mersenne_prime_exponent);
 

@@ -35,6 +35,10 @@ Modified by Gogis0 to output the SLP in a plain format
 #include <unistd.h>
 #include "hashing.h"
 
+const uint64_t mersenne_prime_exponent = 61;
+const uint64_t prime = ((uint64_t)1 << 61) - 1; // 2^61 - 1 // Must use mersenne_prime_exponent here
+const uint64_t base = 411910476928516559; // randomly generated
+
 typedef struct {
     unsigned int left, right;
 } Tpair;
@@ -275,6 +279,12 @@ int main(int argc, char **argv) {
   // read the suffixient set
   uint64_t suff_size, *suffixient;
   load_suffixient(argv[1], &suff_size, &suffixient);
+
+  // Write the contents of the suffixient set for debugging
+  for (int i = 0; i < suff_size; i++) {
+    printf("%zd\n", suffixient[i]);
+  }
+
 
   // open output file
   read_grammar(argv[1]);

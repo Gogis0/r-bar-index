@@ -26,7 +26,7 @@ output_filename="${filename}.suffixient"
 
 # Start with generating the suffixient set
 log "Generating suffixient set for file: $filename"
-~/externalSoftware/suffixient/build/suffixient -o "$output_filename" < "$filename" >> "$logfile" 2>&1
+build/_deps/suffixient-build/suffixient -o "$output_filename" < "$filename" >> "$logfile" 2>&1
 
 # Check if the suffixient set is generated
 if [ $? -ne 0 ]; then
@@ -40,7 +40,7 @@ fi
 
 # Next step is to generate the grammar using bigrepair
 log "Generating grammar using bigrepair for file: $filename"
-~/externalSoftware/bigrepair/bigrepair -v "${filename}" >> "$logfile" 2>&1
+build/thirdparty/bigrepair/bigrepair -v "${filename}" >> "$logfile" 2>&1
 
 # Check if the grammar is generated
 if [ $? -ne 0 ]; then
@@ -54,7 +54,7 @@ fi
 
 # Build ShapedSlp
 log "Building ShapedSlp for file: $filename"
-~/externalSoftware/ShapedSlp/build/SlpEncBuild -i "${filename}" -f Bigrepair -e PlainSlp_32Fblc -o "${filename}.PlainSlp_32Fblc" >> "$logfile" 2>&1
+build/_deps/shapedslp-build/SlpEncBuild -i "${filename}" -f Bigrepair -e PlainSlp_32Fblc -o "${filename}.PlainSlp_32Fblc" >> "$logfile" 2>&1
 
 # Check if the ShapedSlp is built
 if [ $? -ne 0 ]; then
@@ -68,7 +68,7 @@ fi
 
 # Build the rho-index
 log "Building the rho-index for file: $filename"
-~/externalSoftware/rho-index/build/build_index "${filename}" >> "$logfile" 2>&1
+build/build_index "${filename}" >> "$logfile" 2>&1
 
 # Check if the build_index command succeeded
 if [ $? -ne 0 ]; then
